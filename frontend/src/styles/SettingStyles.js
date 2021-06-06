@@ -16,6 +16,22 @@ const styles = (theme) => ({
         alignItems: "flex-start",
         justifyContent: "center"
     },
+    form : {
+        display: "flex",
+        flexDirection: "row",
+        width: "100%",
+    },
+    formElement: {
+        marginLeft: "1em",
+        marginTop: "0.4em"
+    },
+    select: {
+        width: '7em',
+        marginLeft: "2em",
+    },
+    button: {
+        marginLeft: "3em",
+    },
 
 });
 

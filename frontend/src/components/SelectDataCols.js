@@ -1,5 +1,6 @@
 import { Paper, withStyles, FormLabel, Select, MenuItem, FormControl } from "@material-ui/core";
 import React, {useEffect, useState} from "react";
+import {useHistory} from "react-router-dom";
 import axios from "axios";
 import styles from "../styles/SelectDataColStyles";
 import address from "./address";
@@ -35,6 +36,8 @@ function SelectDataCol(props) {
     const [openTimestamp, setOpenTimestamp] = useState(false);
     const [openFormat, setOpenFormat] = useState(false);
 
+    let history = useHistory();
+
     const handleOpen = (handler) => {
         handler(true);
     }
@@ -62,6 +65,7 @@ function SelectDataCol(props) {
     }
     const handleClick = () => {
         setDone(!done);
+        history.push('/tool/setting');
     }
 
     useEffect(async () => {
