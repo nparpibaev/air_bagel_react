@@ -1,7 +1,8 @@
-import { Paper, withStyles, FormLabel, Select, MenuItem, FormControl } from "@material-ui/core";
+import { Paper, withStyles, FormLabel, Select, MenuItem } from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
 import styles from "../styles/SelectDataColStyles";
 import address from "./address";
 
@@ -95,8 +96,6 @@ function SelectDataCol(props) {
         mode: "no-cors",
         };
         let res = await axios.post(select_address, selections, {headers: header});
-        console.log(res);
-        console.log(selections);
         }, [done])
 
     return (
@@ -115,7 +114,7 @@ function SelectDataCol(props) {
                 >
                     {
                         items.map((c) => {
-                            return  <MenuItem value={c} key={c}>{c}</MenuItem>
+                            return  <MenuItem value={c} key={uuidv4()}>{c}</MenuItem>
                         })
                     }
                 </Select>

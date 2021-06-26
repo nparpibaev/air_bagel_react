@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {Select, MenuItem, Paper, withStyles, FormLabel} from "@material-ui/core";
+import {Paper, withStyles} from "@material-ui/core";
 import address from "./address";
+import { v4 as uuidv4 } from 'uuid';
 import styles from "../styles/ColumnStyles.js";
 import axios from "axios";
 
@@ -37,10 +38,14 @@ function Columns(props) {
         <Paper className={classes.paper}>
             <h3>The data preview</h3>
             <table>
-                <tr>
-                    {new_items[0].map(cur => <th>{cur}</th>)}
-                </tr>
-                {new_items.slice(1).map( (c) => { return (<tr> {c.map( (c1) => <td>{c1}</td> ) }</tr>); })}
+                <thead>
+                    <tr>
+                        {new_items[0].map(cur => <th key={uuidv4()}>{cur}</th>)}
+                    </tr>
+                </thead>
+                <tbody>
+                    {new_items.slice(1).map( (c) => { return (<tr key={uuidv4()}> {c.map( (c1) => <td key={uuidv4()}>{c1}</td> ) }</tr>); })}
+                </tbody>
             </table>
         </Paper>
         </div>

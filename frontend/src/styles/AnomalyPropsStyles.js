@@ -14,19 +14,36 @@ const styles = (theme) => ({
         alignItems: "flex-start",
         justifyContent: "center"
     },
+    anomaliesList: {
+        width: "100%"
+    },
    anomaliesItem: {
-       marginLeft: theme.spacing(10),
-       marginRight: theme.spacing(25),
+       width:"90%",
+       marginLeft: theme.spacing(5),
+       marginRight: theme.spacing(5),
        display: "flex",
+       flexDirection: "row",
        justifyContent: "space-between",
    },
-   listItem: {
-    listStyle: "none"
+   strength: {
+    display:"flex",
+    flexDirection:"row",
+    justifyContent: "space-between"
+   },
+   maxLength: {
+    display:"flex",
+    flexDirection:"row",
+    justifyContent: "space-between"
    },
    input: {
-       maxWidth: "30px",
+       maxWidth: "100px",
        maxHeight: "30px",
    },
+   label: {
+       marginLeft: theme.spacing(5),
+       marginRight: theme.spacing(2),
+       marginTop: theme.spacing(1)
+   }
 });
 
 export default styles;

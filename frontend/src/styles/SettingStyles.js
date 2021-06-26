@@ -8,8 +8,6 @@ const styles = (theme) => ({
     },
     paper: {
         width: '50em',
-        display: "flex",
-        flexDirection: "column",
         padding: "2em",
         display: "flex",
         flexDirection: "column",
@@ -31,6 +29,13 @@ const styles = (theme) => ({
     },
     button: {
         marginLeft: "3em",
+    },
+    doneButton: {
+        color: "blue",
+        margin: theme.spacing(2),
+        float: "right",
+        right: theme.spacing(62.5),
+        
     },
 
 });

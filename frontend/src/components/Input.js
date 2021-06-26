@@ -36,11 +36,7 @@ useEffect(async ()=>{
       mode: "no-cors",
     };
     let res = await axios.post(file_address, data, {headers: header});
-    // if(res.status !== 200)
-    //   alert("There was a problem. Please try again");
-    // else
     setCanGetColumns(true);
-    console.log(canGetColumns);
 
   }
 }, [isUploaded]);
@@ -57,7 +53,12 @@ useEffect(async ()=>{
           <button>Submit</button>
         </form>
       </Paper>
-      {canGetColumns && <><Columns/><SelectDataCols/></>}
+      { canGetColumns && 
+        <div>
+          <Columns/>
+          <SelectDataCols/>
+        </div>
+      }
       
     </div>
   );

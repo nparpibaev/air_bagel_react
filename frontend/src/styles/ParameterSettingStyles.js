@@ -14,10 +14,14 @@ const styles = (theme) => ({
         alignItems: "flex-start",
         justifyContent: "center"
     },
-    label: {
-        margin:"3em",
-    }
-
-})
+   anomaliesItem: {
+       display: "flex",
+       justifyContent: "space-between",
+   },
+   input: {
+       maxWidth: "30px",
+       maxHeight: "30px",
+   },
+});
 
 export default styles;

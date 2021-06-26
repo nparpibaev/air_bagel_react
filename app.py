@@ -8,14 +8,56 @@ app = Flask(__name__)
 # app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 
-# This is the anomalies to add in the file and it is set in /tool/anomalies route by fronted. how to get it:
+# This is the anomalies to add in the file and it is set in /tool/anomalies route by frontend. how to get it:
 # key name - "Resource" gives dict for resource anomalies and "System" gives for system
-# the given dicts have key - "probDist" for distribution type and "anomalies" for anomalies to add
+# the given dicts have key - "probDist" for distribution type and "anomalies" for anomalies object to add
+# one example: if ANOMALIES_TO_ADD has Resource key, then the value for that key should be smth like this:
+'''
+    ANOMALIES_TO_ADD["Resource"] = {
+        "probDist": {
+            "Random"
+        },
+        "anomalies": {
+            "Skip": {
+                "strength": "3"
+            },
+            "Insert": {
+                "strength": "7",
+                "max-length": "10"
+            }
+        }
+    } 
+'''
+# Note1: the "Insert" has "max-length" attr but "Skip" doesnt
+# Note2: check the types or type cast when using the values like "strength" 
 ANOMALIES_TO_ADD = {}
 
 # This is used to get selected attributes from 
 # user-set atrributes dictionary of SELECTIONS
 ATTRS = ["Case_ID", "Event_ID", "Activity", "Timestamp", "format"] 
+
+
+
+# This is a reference for the anomaly types that are supported
+# it can be used to get the anomalies in ANOMALIES_TO_ADD. The names are the same
+ANOMALIES = {
+    "Resource": [
+        "Skip",
+        "Switch",
+        "Replace",
+        "Incomplete",
+        "Rework",
+        "Form based",
+        "Insert"
+    ],
+    "System":[
+        "Skip",
+        "Form based",
+        "Cut"
+    ],
+}
+
+
 
 # This is user selected (set) attributes dictionary.
 # Keys => ATRRS items(above variable) and VALUES => FILE dataframe columns
@@ -28,7 +70,7 @@ FILE = None
 @app.route('/')
 @app.route('/home', methods=["GET"])
 def home_route():
-    return jsonify({"message": "NIMA GAP"})
+    return "Ok",200
 
 
 @app.route('/tool/file', methods=['POST', "GET"])
@@ -36,15 +78,13 @@ def upload_file():
     hello = {}
     global FILE
     if request.method == "GET":
-        return jsonify(hello="from tool/file with GET")
+        return "Ok", 200
     uploaded_file = request.files.get('file', False)
     if uploaded_file != False:
-        print("Got the file", type(uploaded_file))
         csv = pd.read_csv(uploaded_file)
         FILE = csv
         print(FILE.describe())
-        hello["message"] = "helloooooo"
-    return jsonify(hello)
+    return "Ok"
 
 
 @app.route('/tool/columns', methods=["GET"])
@@ -61,24 +101,22 @@ def selecting_route():
     res = FILE.columns
     if request.method == "POST":
         SELECTIONS = request.json
-        print(SELECTIONS)
-        return "GOOD"
+        return "Ok"
     else: return json.dumps(res.to_list())
 
 
 @app.route('/tool/anomalies', methods=["POST"])
 def anomalies_route():
-    resp = Response("Foo bar baz")
+    resp = Response("Ok")
     resp.headers['Access-Control-Allow-Origin'] = '*'
     global ANOMALIES_TO_ADD
     data = request.form
-    print(request.form)
     if data:
         temp = {}
         temp["probDist"] = data["probDist"]
         temp["anomalies"] =  data["anomalies"]
         ANOMALIES_TO_ADD[data["name"]] = temp
-    print(ANOMALIES_TO_ADD)
+    print(ANOMALIES_TO_ADD["Resource"]["anomalies"])
     return resp
 
 if __name__ == '__main__':

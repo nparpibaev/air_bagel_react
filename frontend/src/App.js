@@ -4,6 +4,7 @@ import ToolPage from './components/ToolPage';
 import MainPage from './components/MainPage';
 import AboutPage from './components/AboutPage';
 import Setting from "./components/Setting";
+import ParameterSetting from './components/ParameterSetting';
 import './App.css';
 function App() {
   return (
@@ -17,6 +18,11 @@ function App() {
         exact
         path="/tool/setting"
         render={(routeProps) => <Setting {...routeProps} />}
+        />
+      <Route 
+        exact
+        path="/tool/parameter"
+        render={(routeProps) => <ParameterSetting {...routeProps} />}
         />
       <Route 
         exact

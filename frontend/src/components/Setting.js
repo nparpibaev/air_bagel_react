@@ -1,5 +1,6 @@
-import { Button, Checkbox, FormControl, InputLabel, Menu, MenuItem, Paper, Select, withStyles } from '@material-ui/core';
+import { Button, Checkbox, FormControl, MenuItem, Paper, Select, withStyles } from '@material-ui/core';
 import React, {useState} from 'react';
+import {useHistory} from "react-router-dom";
 import Anomalies from "./Anomalies";
 import styles from "../styles/SettingStyles";
 
@@ -20,7 +21,8 @@ const Setting = (props) => {
     const [anomalyResource, setAnomalyResource] = useState(false);
     const [anomalySystem, setAnomalySystem] = useState(false);
 
-    
+    let history = useHistory()
+
     const handleChange = (event, handler) => {
         handler(event.target.checked);
         console.log(resourceCheck, systemCheck);
@@ -36,7 +38,11 @@ const Setting = (props) => {
         console.log(systemProb);
     }
 
+    const handleClickDone = () => {
+        history.push('/tool/parameter'); 
+    }
     return (
+        <div>
         <div className={classes.main}>
             <Paper className={classes.paper}>
                     <h1>Root Parameter Setting</h1>
@@ -95,6 +101,11 @@ const Setting = (props) => {
             </Paper>
             { anomalyResource && <Anomalies type="Resource" probDist={resourceProb} /> }
             { anomalySystem && <Anomalies type="System" probDist={systemProb} /> }
+        </div>
+        <Button variant="contained" color="inherit"
+                        className={classes.doneButton}
+                        onClick={handleClickDone}
+                        >Done</Button>  
         </div>
     );
 }
