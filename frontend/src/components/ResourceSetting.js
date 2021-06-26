@@ -1,8 +1,6 @@
 import { withStyles, Paper } from "@material-ui/core"
 import React, {useContext} from "react"
-import ResourceSetting from "./ResourceSetting"
-import SystemSetting from "./SystemSetting"
-import styles from "../styles/ParameterSettingStyles"
+import styles from "../styles/ResourceSettingStyles"
 import { ParameterContext } from "../contexts/parameterContext"
 
 
@@ -19,27 +17,20 @@ const systempProbs = [
 ]
 
 
-const ParameterSetting = (props) => {
+const ResourceSetting = (props) => {
     const {classes} =  props
 
     const {parameters} = useContext(ParameterContext)
 
-
-
+    console.log(parameters)
+    
     return (
         <div className={classes.main}>
-            <Paper className={classes.paper}>
-                {   parameters["Resource"] &&
-                    <ResourceSetting/>
-                }
-                { parameters["System"] &&
-                    <SystemSetting/>
-                }
-            </Paper>
+                <h1>Resource</h1>
         </div>
     )
 }
 
 
 
-export default withStyles(styles)(ParameterSetting);
+export default withStyles(styles)(ResourceSetting);

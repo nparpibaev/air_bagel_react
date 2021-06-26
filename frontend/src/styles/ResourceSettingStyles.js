@@ -5,15 +5,7 @@ const styles = (theme) => ({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-    },
-    paper: {
-        width: '50em',
-        padding: "2em",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-        justifyContent: "center"
-    },
+    }
 });
 
 export default styles;
