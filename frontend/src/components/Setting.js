@@ -1,7 +1,8 @@
 import { Button, Checkbox, FormControl, MenuItem, Paper, Select, withStyles } from '@material-ui/core';
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {useHistory} from "react-router-dom";
 import Anomalies from "./Anomalies";
+import { ParameterContext } from '../contexts/parameterContext';
 import styles from "../styles/SettingStyles";
 
 
@@ -21,6 +22,7 @@ const Setting = (props) => {
     const [anomalyResource, setAnomalyResource] = useState(false);
     const [anomalySystem, setAnomalySystem] = useState(false);
 
+    const {setParameters} = useContext(ParameterContext)
     let history = useHistory()
 
     const handleChange = (event, handler) => {
@@ -39,6 +41,14 @@ const Setting = (props) => {
     }
 
     const handleClickDone = () => {
+        let temp = {}
+        if (resourceCheck == true) {
+            temp["Resource"] = resourceProb
+        }
+        if(systemCheck) {
+            temp["System"] = systemProb
+        }
+        setParameters(temp)
         history.push('/tool/parameter'); 
     }
     return (
