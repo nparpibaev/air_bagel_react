@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, Response
+from flask import Flask, request, jsonify, Response, make_response
 from flask_cors import CORS
 import pandas as pd
 import json
@@ -76,7 +76,7 @@ SELECTIONS = None
 
 # This is the global pandas dataframe we can use. 
 # It won't be None when added
-FILE = None 
+FILE = pd.DataFrame()
 
 @app.route('/')
 @app.route('/home', methods=["GET"])
@@ -150,6 +150,14 @@ def parameter_route():
     else:
         return "GET", 200
 
-
+@app.route('/tool/simulate', methods=["GET"])
+def simulate_route():
+    global FILE
+    resp = make_response(FILE.to_csv())
+    resp.headers["Content-Disposition"] = "attachment; filename=export.csv"
+    resp.headers["Content-Type"] = "text/csv"
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
+    
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,31 +1,20 @@
-import { withStyles, Paper } from "@material-ui/core"
+import { withStyles, Paper, Button } from "@material-ui/core"
 import React, {useContext} from "react"
 import ResourceSetting from "./ResourceSetting"
 import SystemSetting from "./SystemSetting"
 import NavBar from "./NavBar"
 import Footer from "./Footer"
+import address from "./address"
+import axios from "axios"
 import styles from "../styles/ParameterSettingStyles"
 import { ParameterContext } from "../contexts/parameterContext"
 
-
-const systemProbs = [
-    "Manual setting",
-    "Random (Exponential dist.)",
-    "Random (Normal dist.",
-    "Random (Uniform dist.)"
-]
-
-const systempProbs = [
-    "Manual setting",
-    "Random (Poisson)"
-]
 
 
 const ParameterSetting = (props) => {
     const {classes} =  props
 
     const {parameters} = useContext(ParameterContext)
-
 
     return (
         <div>
@@ -38,6 +27,8 @@ const ParameterSetting = (props) => {
                 { parameters["System"] &&
                     <SystemSetting/>
                 }
+                <Button href={`${address+"/tool/simulate"}`}  variant="contained" color="inherit"
+                        >Simulate Now</Button> 
             </Paper>
         </div>
             <Footer/>
