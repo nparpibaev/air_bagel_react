@@ -5,7 +5,6 @@ import SystemSetting from "./SystemSetting"
 import NavBar from "./NavBar"
 import Footer from "./Footer"
 import address from "./address"
-import axios from "axios"
 import styles from "../styles/ParameterSettingStyles"
 import { ParameterContext } from "../contexts/parameterContext"
 
