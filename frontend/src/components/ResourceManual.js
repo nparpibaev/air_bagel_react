@@ -1,20 +1,6 @@
 import { withStyles } from "@material-ui/core"
-import React, {useContext} from "react"
+import React, {useState} from "react"
 import styles from "../styles/ResourceManualStyles"
-import { ParameterContext } from "../contexts/parameterContext"
-
-
-const systemProbs = [
-    "Manual setting",
-    "Random (Exponential dist.)",
-    "Random (Normal dist.",
-    "Random (Uniform dist.)"
-]
-
-const systempProbs = [
-    "Manual setting",
-    "Random (Poisson)"
-]
 
 
 const ResourceManual = (props) => {
