@@ -1,7 +1,6 @@
 import { withStyles, Button } from "@material-ui/core"
 import React, {useState} from "react"
 import axios from "axios"
-import { v4 as uuidv4 } from 'uuid';
 import address from "./address"
 import styles from "../styles/AnomalyPropsStyles"
 
@@ -86,7 +85,7 @@ const AnomalyProps = (props) => {
         let temp = []
         let len = inputs.length
         for(let i = 0; i < len; i++) {
-            if(i != pos1) {
+            if(i !== pos1) {
                 temp.push(inputs[i])
             }
             else {

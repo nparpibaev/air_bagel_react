@@ -27,10 +27,13 @@ function Columns(props) {
     const {classes} = props;
     const [items, setItems] = useState([]);
 
-    useEffect(async ()=>{
+    useEffect( ()=>{
+        async function fetchData() {
         let column_address = address + "/tool/columns";
         const result = await axios(column_address);
         setItems(result.data);
+        }
+        fetchData()
     }, [])
     let new_items = helper(items);
     return (

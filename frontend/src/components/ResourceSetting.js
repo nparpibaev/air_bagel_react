@@ -1,20 +1,9 @@
-import { withStyles, Paper } from "@material-ui/core"
+import { withStyles } from "@material-ui/core"
 import React, {useContext} from "react"
+import ResourceManual from "./ResourceManual"
+import ResourceRandom from "./ResourceRandom"
 import styles from "../styles/ResourceSettingStyles"
 import { ParameterContext } from "../contexts/parameterContext"
-
-
-const systemProbs = [
-    "Manual setting",
-    "Random (Exponential dist.)",
-    "Random (Normal dist.",
-    "Random (Uniform dist.)"
-]
-
-const systempProbs = [
-    "Manual setting",
-    "Random (Poisson)"
-]
 
 
 const ResourceSetting = (props) => {
@@ -22,11 +11,22 @@ const ResourceSetting = (props) => {
 
     const {parameters} = useContext(ParameterContext)
 
+    let elem
+
+    if(parameters["Resource"]) {
+        if(parameters["Resource"] === "Self Configuration") {
+            elem = <ResourceManual/>
+        } else {
+            elem = <ResourceRandom/> 
+        }
+    }
+
     console.log(parameters)
     
     return (
         <div className={classes.main}>
                 <h1>Resource</h1>
+                {elem}
         </div>
     )
 }

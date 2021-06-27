@@ -25,7 +25,6 @@ const ParameterSetting = (props) => {
     const {parameters} = useContext(ParameterContext)
 
 
-
     return (
         <div className={classes.main}>
             <Paper className={classes.paper}>

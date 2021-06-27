@@ -42,7 +42,7 @@ const Setting = (props) => {
 
     const handleClickDone = () => {
         let temp = {}
-        if (resourceCheck == true) {
+        if (resourceCheck === true) {
             temp["Resource"] = resourceProb
         }
         if(systemCheck) {

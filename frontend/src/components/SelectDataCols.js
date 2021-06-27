@@ -69,7 +69,8 @@ function SelectDataCol(props) {
         history.push('/tool/setting');
     }
 
-    useEffect(async () => {
+    useEffect(() => {
+        async function fetchData(){
         let select_address = address + "/tool/selecting";
         const myInit = {
             headers: {
@@ -86,9 +87,12 @@ function SelectDataCol(props) {
         }).catch(function(e){
             console.log(e);
         });
+        }
+        fetchData();
     }, [])
     
-    useEffect(async () => {
+    useEffect(() => {
+        async function fetchData(){
         let select_address = address + "/tool/selecting";  
         let header = {
         'Content-Type': "application/json",
@@ -96,7 +100,9 @@ function SelectDataCol(props) {
         mode: "no-cors",
         };
         let res = await axios.post(select_address, selections, {headers: header});
-        }, [done])
+    }
+    fetchData()
+}, [done])
 
     return (
         <div className={classes.main}>

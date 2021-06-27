@@ -25,7 +25,8 @@ const handleSubmit = (e) =>{
   }
 };
 
-useEffect(async ()=>{
+useEffect(()=>{
+  async function fetchData(){
   if(!isFirstMount){
     let file_address = address + '/tool/file';
     let data = new FormData();
@@ -39,6 +40,8 @@ useEffect(async ()=>{
     setCanGetColumns(true);
 
   }
+}
+fetchData()
 }, [isUploaded]);
 
 

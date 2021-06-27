@@ -58,6 +58,17 @@ ANOMALIES = {
 }
 
 
+# This is used to get the params of probability distributions for resource and random
+# The format is like this: PARAMS["Resource"] or PARAMS["System"] returns an object like this:
+'''
+    PARAMS["Resource"] = {
+        "probDist": "Random (Exponential dist.)",
+        "params": [
+            {"lambda": "2"}
+        ]
+    }
+'''
+PARAMS = {}
 
 # This is user selected (set) attributes dictionary.
 # Keys => ATRRS items(above variable) and VALUES => FILE dataframe columns
@@ -118,6 +129,27 @@ def anomalies_route():
         ANOMALIES_TO_ADD[data["name"]] = temp
     print(ANOMALIES_TO_ADD["Resource"]["anomalies"])
     return resp
+
+
+@app.route('/tool/parameter', methods=["POST", "GET"])
+def parameter_route():
+    resp = Response("Ok")
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    global PARAMS
+    if request.method == "POST":
+        data = request.form
+        if data:
+            type = data["name"]
+            temp = {}
+            temp["probDist"] = data["probDist"]
+            temp["params"] = data["params"]
+            PARAMS[type] = temp
+            print(PARAMS[type])
+            return resp
+        return "data not ok"
+    else:
+        return "GET", 200
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,20 +1,10 @@
 import { withStyles, Paper } from "@material-ui/core"
 import React, {useContext} from "react"
+import SystemManual from "./SystemManual"
+import SystemRandom from "./SystemRandom"
 import styles from "../styles/SystemSettingStyles"
 import { ParameterContext } from "../contexts/parameterContext"
 
-
-const systemProbs = [
-    "Manual setting",
-    "Random (Exponential dist.)",
-    "Random (Normal dist.",
-    "Random (Uniform dist.)"
-]
-
-const systempProbs = [
-    "Manual setting",
-    "Random (Poisson)"
-]
 
 
 const SystemSetting = (props) => {
@@ -22,11 +12,21 @@ const SystemSetting = (props) => {
 
     const {parameters} = useContext(ParameterContext)
 
+    let elem
 
-    console.log(parameters)
+    if(parameters["System"]) {
+        if(parameters["System"] === "Self Configuration") {
+            elem = <SystemManual/>
+        } else {
+            elem = <SystemRandom/> 
+        }
+    }
+    
+
     return (
         <div className={classes.main}>
                 <h1>System</h1>
+                {elem}
         </div>
     )
 }
