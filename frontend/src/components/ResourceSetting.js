@@ -25,7 +25,6 @@ const ResourceSetting = (props) => {
     
     return (
         <div className={classes.main}>
-                <h1>Resource</h1>
                 {elem}
         </div>
     )

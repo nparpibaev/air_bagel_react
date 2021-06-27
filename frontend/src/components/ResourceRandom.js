@@ -89,6 +89,7 @@ const ResourceRandom = (props) => {
                                         type="checkbox"
                                         name = {item["name"]}
                                         onChange={(e) => handleChange(e, index, 0)}
+                                        className={classes.checkbox}
                                     />
                                     <label>{item["name"]}</label>
                                     {item["params"].map((c, i) => {
@@ -99,6 +100,7 @@ const ResourceRandom = (props) => {
                                                     name={c}
                                                     id = {c+item["name"]}
                                                     onChange={(e)=> handleChange(e, index, i+1) }
+                                                    className={classes.input}
                                                 />
                                             </>
                                         )

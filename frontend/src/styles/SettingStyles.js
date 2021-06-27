@@ -1,6 +1,7 @@
 const styles = (theme) => ({
     main: {
         marginTop: theme.spacing(10),
+        marginBottom: theme.spacing(10),
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -33,6 +34,7 @@ const styles = (theme) => ({
     doneButton: {
         color: "blue",
         margin: theme.spacing(2),
+        marginBottom: theme.spacing(10),
         float: "right",
         right: theme.spacing(62.5),
         

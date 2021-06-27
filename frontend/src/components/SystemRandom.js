@@ -51,6 +51,7 @@ const SystemRandom = (props) => {
                         <input
                             id = "days"
                             name = "days"
+                            className={classes.input}
                             onChange={(e) => handleChange(e, 0)}
                         />
                         <p>(2) Max/Min duration of system malfunctioning to set 'finish_timestamp'</p>
@@ -58,12 +59,14 @@ const SystemRandom = (props) => {
                         <input
                             id = "min-hours"
                             name = "min-hours"
+                            className={classes.input}
                             onChange={(e) => handleChange(e, 1)}
                         />
                         <label>-b(maximum hours) = </label>
                         <input
                             id = "max-hours"
                             name = "max-hours"
+                            className={classes.input}
                             onChange={(e) => handleChange(e, 2)}
                         />
                     </div>

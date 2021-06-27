@@ -34,7 +34,7 @@ ANOMALIES_TO_ADD = {}
 
 # This is used to get selected attributes from 
 # user-set atrributes dictionary of SELECTIONS
-ATTRS = ["Case_ID", "Event_ID", "Activity", "Timestamp", "format"] 
+ATTRS = ["Case_ID", "Event_ID", "Activity", "Timestamp", "format", "Resource", "System"] 
 
 
 
@@ -72,7 +72,7 @@ PARAMS = {}
 
 # This is user selected (set) attributes dictionary.
 # Keys => ATRRS items(above variable) and VALUES => FILE dataframe columns
-SELECTIONS = None
+SELECTIONS = {}
 
 # This is the global pandas dataframe we can use. 
 # It won't be None when added
@@ -111,7 +111,8 @@ def selecting_route():
     global SELECTIONS
     res = FILE.columns
     if request.method == "POST":
-        SELECTIONS = request.json
+        SELECTIONS = request.get_json()
+        print(SELECTIONS)
         return "Ok"
     else: return json.dumps(res.to_list())
 
@@ -136,6 +137,8 @@ def parameter_route():
     resp = Response("Ok")
     resp.headers['Access-Control-Allow-Origin'] = '*'
     global PARAMS
+    global FILE
+    global SELECTIONS
     if request.method == "POST":
         data = request.form
         if data:
@@ -148,7 +151,11 @@ def parameter_route():
             return resp
         return "data not ok"
     else:
-        return "GET", 200
+        col = SELECTIONS["Resource"]
+        resources = FILE.loc[:, col]
+        resp = make_response(jsonify(resources))
+        resp.headers["Access-Control-Allow-Origin"] = '*'
+        return resp
 
 @app.route('/tool/simulate', methods=["GET"])
 def simulate_route():
@@ -158,6 +165,6 @@ def simulate_route():
     resp.headers["Content-Type"] = "text/csv"
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
-    
+
 if __name__ == '__main__':
     app.run(debug=True)

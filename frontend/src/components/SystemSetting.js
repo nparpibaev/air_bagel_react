@@ -25,7 +25,6 @@ const SystemSetting = (props) => {
 
     return (
         <div className={classes.main}>
-                <h1>System</h1>
                 {elem}
         </div>
     )

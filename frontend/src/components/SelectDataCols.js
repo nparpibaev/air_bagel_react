@@ -7,7 +7,7 @@ import styles from "../styles/SelectDataColStyles";
 import address from "./address";
 
 
-const attrs = ["Case_ID", "Event_ID", "Activity", "Timestamp", "format"];
+const attrs = ["Case_ID", "Event_ID", "Activity", "Timestamp", "format", "Resource", "System"];
 const formats = ["","2020-01-02 03:04:05.006" , "2020-01-02 03:04:05",
 "2020-01-02 03:04:05.006 PM", "2020-01-02 03:04:05 PM",
 "20-01-02 03:04:05.006", "20-01-02 03:04:05",
@@ -30,12 +30,16 @@ function SelectDataCol(props) {
     const [activity, setActivity] = useState('');
     const [timestamp, setTimestamp] = useState('');
     const [format, setFormat] = useState('');
+    const [resource, setResource] = useState("")
+    const [system, setSystem] = useState("")
 
     const [openCase, setOpenCase] = useState(false);
     const [openEvent, setOpenEvent] = useState(false);
     const [openActivity, setOpenActivity] = useState(false);
     const [openTimestamp, setOpenTimestamp] = useState(false);
     const [openFormat, setOpenFormat] = useState(false);
+    const [openResource, setOpenResource] = useState(false);
+    const [openSystem, setOpenSystem] = useState(false);
 
     let history = useHistory();
 
@@ -58,6 +62,12 @@ function SelectDataCol(props) {
         }
         else if(handler === setTimestamp) {
             selections[attrs[3]] = event.target.value;
+        }
+        else if(handler === setResource) {
+            selections[attrs[5]] = event.target.value;
+        }
+        else if(handler === setSystem) {
+            selections[attrs[6]] = event.target.value;
         }
         else {
             selections[attrs[4]] = event.target.value;
@@ -95,10 +105,10 @@ function SelectDataCol(props) {
         async function fetchData(){
         let select_address = address + "/tool/selecting";  
         let header = {
-        'Content-Type': "application/json",
         method: "POST",
         mode: "no-cors",
         };
+        console.log(selections)
         let res = await axios.post(select_address, selections, {headers: header});
     }
     fetchData()
@@ -188,6 +198,40 @@ function SelectDataCol(props) {
                 >
                     {
                         formats.map((c) => {
+                            return  <MenuItem value={c} key={c}>{c}</MenuItem>
+                        })
+                    }
+                </Select>
+            </div>
+            <div className={classes.select}>
+                <FormLabel className={classes.label}>Resource</FormLabel>
+                <Select
+                 id="select6"
+                 open={openResource}
+                 onClose={ () => handleClose(setOpenResource)}
+                 onOpen={() => handleOpen(setOpenResource)}
+                 value = {resource}
+                 onChange={(e) => handleChange(setResource, e)}
+                >
+                    {
+                        attrs.map((c) => {
+                            return  <MenuItem value={c} key={c}>{c}</MenuItem>
+                        })
+                    }
+                </Select>
+            </div>
+            <div className={classes.select}>
+                <FormLabel className={classes.label}>System</FormLabel>
+                <Select
+                 id="select7"
+                 open={openSystem}
+                 onClose={ () => handleClose(setOpenSystem)}
+                 onOpen={() => handleOpen(setOpenSystem)}
+                 value = {system}
+                 onChange={(e) => handleChange(setSystem, e)}
+                >
+                    {
+                        attrs.map((c) => {
                             return  <MenuItem value={c} key={c}>{c}</MenuItem>
                         })
                     }
