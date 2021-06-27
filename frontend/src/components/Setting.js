@@ -2,6 +2,8 @@ import { Button, Checkbox, FormControl, MenuItem, Paper, Select, withStyles } fr
 import React, {useState, useContext} from 'react';
 import {useHistory} from "react-router-dom";
 import Anomalies from "./Anomalies";
+import NavBar from './NavBar';
+import Footer from './Footer';
 import { ParameterContext } from '../contexts/parameterContext';
 import styles from "../styles/SettingStyles";
 
@@ -53,6 +55,7 @@ const Setting = (props) => {
     }
     return (
         <div>
+            <NavBar/>
         <div className={classes.main}>
             <Paper className={classes.paper}>
                     <h1>Root Parameter Setting</h1>
@@ -112,10 +115,13 @@ const Setting = (props) => {
             { anomalyResource && <Anomalies type="Resource" probDist={resourceProb} /> }
             { anomalySystem && <Anomalies type="System" probDist={systemProb} /> }
         </div>
+        <div>
         <Button variant="contained" color="inherit"
                         className={classes.doneButton}
                         onClick={handleClickDone}
                         >Done</Button>  
+        </div>
+        <Footer />
         </div>
     );
 }

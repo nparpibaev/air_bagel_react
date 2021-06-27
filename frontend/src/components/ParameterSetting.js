@@ -2,6 +2,8 @@ import { withStyles, Paper } from "@material-ui/core"
 import React, {useContext} from "react"
 import ResourceSetting from "./ResourceSetting"
 import SystemSetting from "./SystemSetting"
+import NavBar from "./NavBar"
+import Footer from "./Footer"
 import styles from "../styles/ParameterSettingStyles"
 import { ParameterContext } from "../contexts/parameterContext"
 
@@ -26,6 +28,8 @@ const ParameterSetting = (props) => {
 
 
     return (
+        <div>
+            <NavBar/>
         <div className={classes.main}>
             <Paper className={classes.paper}>
                 {   parameters["Resource"] &&
@@ -35,6 +39,8 @@ const ParameterSetting = (props) => {
                     <SystemSetting/>
                 }
             </Paper>
+        </div>
+            <Footer/>
         </div>
     )
 }
