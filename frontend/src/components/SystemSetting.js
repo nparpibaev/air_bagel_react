@@ -1,4 +1,4 @@
-import { withStyles, Paper } from "@material-ui/core"
+import { withStyles } from "@material-ui/core"
 import React, {useContext} from "react"
 import SystemManual from "./SystemManual"
 import SystemRandom from "./SystemRandom"

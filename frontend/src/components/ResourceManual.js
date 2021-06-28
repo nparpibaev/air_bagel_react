@@ -37,7 +37,6 @@ const ResourceManual = (props) => {
                 }
             }
         }
-        console.log(temp)
         setInputs(temp)
     }
     
@@ -46,7 +45,6 @@ const ResourceManual = (props) => {
         let manual_address = address + "/tool/parameter";
         let res = await axios.get(manual_address)
         setItems(res.data)
-        console.log(res.data)
         }
         fetchData();
     }, [])
@@ -63,7 +61,6 @@ const ResourceManual = (props) => {
         data["name"] = "Resource"
         data["probDist"] = "Manual Setting"
         data["params"] = temp
-        console.log(temp)
         const res = await axios.post(parameterAddress, data, {headers:header});
         console.log(res);
         

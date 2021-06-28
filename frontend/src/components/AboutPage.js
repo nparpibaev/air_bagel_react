@@ -1,7 +1,6 @@
 import React from "react"
 import Footer from "./Footer"
 import NavBar from "./NavBar"
-import {Paper} from "@material-ui/core"
 import "./styles/AboutPageStyles.css"
 
 export default function AboutPage() {
