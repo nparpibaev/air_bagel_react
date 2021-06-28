@@ -24,18 +24,18 @@ const SystemRandom = (props) => {
     const handleSubmit = async () => {
         let parameterAddress = address + "/tool/parameter";
         let header = {
-            'Content-Type': "multi-part/form-data",
+            'Content-Type': "application/json",
             method:"POST",
         }
-        let data = new FormData()
+        let data = {}
         let params = {}
         params["days"] = inputs[0]
         params["min-houts"] = inputs[1]
         params["max-houts"] = inputs[2]
-        data.append("name", "System")
-        data.append("probDist", "Random (Poisson dist.)")
+        data["name"] = "System"
+        data["probDist"] = "Random (Poisson dist.)"
 
-        data.append("params",params)
+        data["params"] = params
         const res = await axios.post(parameterAddress, data, {headers:header});
         console.log(res);
     }

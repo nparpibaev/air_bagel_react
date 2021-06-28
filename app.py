@@ -111,10 +111,13 @@ def selecting_route():
     global SELECTIONS
     res = FILE.columns
     if request.method == "POST":
+        print("POST: ", request.get_json())
         SELECTIONS = request.get_json()
         print(SELECTIONS)
         return "Ok"
-    else: return json.dumps(res.to_list())
+    else: 
+        print("GET: ", json.dumps(res.to_list()))
+        return json.dumps(res.to_list())
 
 
 @app.route('/tool/anomalies', methods=["POST"])
@@ -122,13 +125,13 @@ def anomalies_route():
     resp = Response("Ok")
     resp.headers['Access-Control-Allow-Origin'] = '*'
     global ANOMALIES_TO_ADD
-    data = request.form
+    data = request.get_json()
     if data:
         temp = {}
         temp["probDist"] = data["probDist"]
         temp["anomalies"] =  data["anomalies"]
+        print(data["anomalies"])
         ANOMALIES_TO_ADD[data["name"]] = temp
-    print(ANOMALIES_TO_ADD["Resource"]["anomalies"])
     return resp
 
 
@@ -140,7 +143,7 @@ def parameter_route():
     global FILE
     global SELECTIONS
     if request.method == "POST":
-        data = request.form
+        data = request.get_json()
         if data:
             type = data["name"]
             temp = {}

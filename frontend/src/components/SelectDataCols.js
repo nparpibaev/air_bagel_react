@@ -75,44 +75,43 @@ function SelectDataCol(props) {
 
     }
     const handleClick = () => {
-        setDone(!done);
+        async function fetchData(){
+            let select_address = address + "/tool/selecting";  
+            let header = {
+            method: "POST",
+            "Content-Type":"application/json"
+            };
+            console.log(selections)
+            let res = await axios.post(select_address, selections, {headers: header});
+            console.log(res)
+        }
+        fetchData()
+        // setDone(!done);
         history.push('/tool/setting');
     }
 
     useEffect(() => {
         async function fetchData(){
         let select_address = address + "/tool/selecting";
-        const myInit = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'text/html',
-            },
-            method: "GET",
-        };
-        const myRequest = new Request(select_address, myInit);
-        fetch(myRequest).then(function(response) {
-            return response.json();
-        }).then(function(response) {
-            setItems(response);
-        }).catch(function(e){
-            console.log(e);
-        });
+        let res = await axios.get(select_address)
+        setItems(res.data)
+        console.log(res)
         }
         fetchData();
     }, [])
     
-    useEffect(() => {
-        async function fetchData(){
-        let select_address = address + "/tool/selecting";  
-        let header = {
-        method: "POST",
-        mode: "no-cors",
-        };
-        console.log(selections)
-        let res = await axios.post(select_address, selections, {headers: header});
-    }
-    fetchData()
-}, [done])
+//     useEffect(() => {
+//         async function fetchData(){
+//         let select_address = address + "/tool/selecting";  
+//         let header = {
+//         method: "POST"
+//         };
+//         console.log(selections)
+//         let res = await axios.post(select_address, selections, {headers: header});
+//         console.log(res)
+//     }
+//     fetchData()
+// }, [done])
 
     return (
         <div className={classes.main}>

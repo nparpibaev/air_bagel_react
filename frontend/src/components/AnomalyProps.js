@@ -101,13 +101,13 @@ const AnomalyProps = (props) => {
     const handleClick = async () => {
         let anomaliesAddress = address + "/tool/anomalies";
         let header = {
-            'Content-Type': "multi-part/form-data",
+            'Content-Type': "application/json",
             method:"POST",
         }
-        let data = new FormData();
-        data.append("name", type);
-        data.append("probDist",probDist);
-        data.append("anomalies",makeFormData(selectedAnomalies, inputs));
+        let data = {}
+        data["name"] = type
+        data["probDist"] = probDist
+        data["anomalies"] = makeFormData(selectedAnomalies, inputs);
         const res = await axios.post(anomaliesAddress, data, {headers:header});
         console.log(res);
         

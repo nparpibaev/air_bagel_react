@@ -65,14 +65,14 @@ const ResourceRandom = (props) => {
     const handleSubmit = async () => {
         let parameterAddress = address + "/tool/parameter";
         let header = {
-            'Content-Type': "multi-part/form-data",
+            'Content-Type': "application/json",
             method:"POST",
         }
-        let data = new FormData()
+        let data = {}
         let temp = makeDataHelper(inputs)
-        data.append("name", temp["name"])
-        data.append("probDist", temp["probDist"])
-        data.append("params", temp["params"])
+        data["name"] = temp["name"]
+        data["probDist"] = temp["probDist"]
+        data["params"] = temp["params"]
         const res = await axios.post(parameterAddress, data, {headers:header});
         console.log(res);
         
