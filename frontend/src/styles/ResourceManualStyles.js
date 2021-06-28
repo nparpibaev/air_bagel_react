@@ -6,6 +6,16 @@ const styles = (theme) => ({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        height: "400px",
+    },
+    list: {
+        overflow: "auto",
+        display: "flex",
+        flexDirection: "column"
+    },
+    listItem: {
+        display:"flex",
+        justifyContent:"space-between"
     }
 });
 

@@ -155,8 +155,9 @@ def parameter_route():
         return "data not ok"
     else:
         col = SELECTIONS["Resource"]
-        resources = FILE.loc[:, col]
-        resp = make_response(jsonify(resources))
+        resources = FILE[col].tolist()
+        print(set(resources))
+        resp = make_response(jsonify(list(set(resources))))
         resp.headers["Access-Control-Allow-Origin"] = '*'
         return resp
 

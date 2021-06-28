@@ -23,7 +23,6 @@ function SelectDataCol(props) {
 
     const {classes} = props;
     const [items, setItems] = useState([]);
-    const [done, setDone] = useState(false);
 
     const [caseId, setCaseId] = useState("");
     const [eventId, setEventId] = useState('');
@@ -86,7 +85,6 @@ function SelectDataCol(props) {
             console.log(res)
         }
         fetchData()
-        // setDone(!done);
         history.push('/tool/setting');
     }
 
@@ -100,19 +98,6 @@ function SelectDataCol(props) {
         fetchData();
     }, [])
     
-//     useEffect(() => {
-//         async function fetchData(){
-//         let select_address = address + "/tool/selecting";  
-//         let header = {
-//         method: "POST"
-//         };
-//         console.log(selections)
-//         let res = await axios.post(select_address, selections, {headers: header});
-//         console.log(res)
-//     }
-//     fetchData()
-// }, [done])
-
     return (
         <div className={classes.main}>
             <Paper className={classes.paper}>
